@@ -1,14 +1,21 @@
 module.exports = {
-  disableEmoji: false,
+  disableEmoji: true,
   format: '{type}{scope}: {emoji}{subject}',
   list: ['feat', 'fix', 'chore'],
   maxMessageLength: 64,
   minMessageLength: 3,
   questions: ['type', 'scope', 'subject'],
   scopes: [
-    'ましゅまろ',
-    'せんべい',
-    'かつおぶし'
+    '2021 ましゅまろ',
+    '2021 せんべい',
+    '2021 かつおぶし',
+    '2020 ましゅまろ',
+    '2020 せんべい',
+    '2020 かつおぶし',
+    '2019 ましゅまろ',
+    '2019 せんべい',
+    '2019 かつおぶし',
+
   ],
   types: {
     chore: {
