@@ -1,5 +1,28 @@
 def main
-    
+    int.times do
+        n, m = intary
+        ans = []
+        # 最小連結成分数
+        min = n - (m + 1)
+        min = 1 if min <= 0
+        min = n if m == 0
+        ans << min
+
+        # 最大連結成分数
+        min = 0
+        max = 1000000000
+        while min + 1 != max
+            center = (min + max) / 2
+            ruiseki = 0.5 * center * (center + 1)
+            if ruiseki > m
+                max = center
+            else
+                min = center
+            end
+        end
+        ans << n - min
+        puts ans.join(" ")
+    end
 end
 
 #----------------------------------------------------------------------------------
