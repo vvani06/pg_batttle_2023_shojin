@@ -3,9 +3,8 @@ def main
         n, m = intary
         ans = []
         # 最小連結成分数
-        min = n - (m + 1)
+        min = n - m
         min = 1 if min <= 0
-        min = n if m == 0
         ans << min
 
         # 最大連結成分数
@@ -20,7 +19,11 @@ def main
                 min = center
             end
         end
-        ans << n - min
+        if m == 0.5 * min * (min + 1)
+            ans << n - min
+        else
+            ans << n - max
+        end
         puts ans.join(" ")
     end
 end
