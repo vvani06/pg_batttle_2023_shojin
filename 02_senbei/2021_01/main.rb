@@ -1,6 +1,16 @@
 def main
     p = int.to_f / 100
-    puts (p ** 4 + (4*3*2)/(1*2*3) * p ** 3 * (1 - p) * p + (5*4*3)/(1*2*3) * p ** 3 * ((1 - p) ** 2) * p + (6*5*4)/(1*2*3) * p ** 3 * ((1 - p) ** 3) * p) * 100
+    game_count = 7
+    win = (game_count + 1) / 2
+    ans = 0
+    win.times do |i|
+        ue = 1
+        (win - 1).times {|x| ue *= x + 1 + i}
+        sita = 1
+        (win - 1).times {|x| sita *= x + 1}
+        ans += ue / sita * p ** (win - 1) * ((1 - p) ** i) * p
+    end
+    puts ans * 100
 end
 
 #----------------------------------------------------------------------------------
