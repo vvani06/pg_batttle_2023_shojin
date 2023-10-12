@@ -6,19 +6,28 @@ void problem() {
   auto R = scan!int(N);
 
   auto solve() {
-    auto pairCounts = 200001.iota.map!(n => n == 0 ? MInt9(0) : MInt9(1) / MInt9(n * (n + 1) / 2)).array;
+    enum MAX = 200_001;
+    auto invPairs = MAX.iota.map!(n => n == 0 ? MInt9(0) : MInt9(1) / MInt9(n * (n + 1) / 2)).array;
     
-    auto dp = new MInt9[](N);
-    MInt9 ans;
-    dp[0] = MInt9(1);
+    auto deltas = new MInt9[](MAX * 2 + 1);
+    MInt9 delta, rate;
     foreach(x; 0..N) {
-      foreach(p; 1..R[x] + 1) {
-        if (p + x < N) {
-          dp[p + x] += dp[x] * MInt9(R[x] - p + 1) * pairCounts[R[x]];
-        } else {
-          ans += MInt9(p + x + 1) * dp[x] * MInt9(R[x] - p + 1) * pairCounts[R[x]];
-        }
-      }
+      const r = x == 0 ? MInt9(1) : rate;
+      const dice = R[x];
+
+      delta += deltas[x];
+      deltas[x + 1] -= r * invPairs[dice];
+      deltas[x + 1 + dice] += r * invPairs[dice];
+
+      rate += delta;
+      rate += r * MInt9(dice) * invPairs[dice];
+    }
+
+    MInt9 ans;
+    foreach(x; N..MAX * 2) {
+      ans += MInt9(x + 1) * rate;
+      delta += deltas[x];
+      rate += delta;
     }
 
     return ans;
