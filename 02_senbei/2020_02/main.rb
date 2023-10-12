@@ -1,17 +1,13 @@
 def main
     n = int
-    puts (1 / (5 ** n).to_f).to_exact_s    
+    puts (1.to_d / (5 ** n).to_d).to_digits
 
 end
 
 #----------------------------------------------------------------------------------
 require "set"
-class Float
-    def to_exact_s
-        digits = to_r.denominator.bit_length - 1
-        sprintf('%.*f', digits, self)
-    end
-end
+require 'bigdecimal'
+require 'bigdecimal/util'
 def int
     gets.chomp.to_i
 end
