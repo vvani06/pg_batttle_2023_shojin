@@ -1,5 +1,5 @@
 def main
-    $h,$m = intary
+    $h,$w = intary
     py, pw, $qy, $qw = intary
     $qw -= 1
     $qy -= 1
@@ -16,7 +16,7 @@ require "set"
 def saiki(w, y, way)
     (-1..2).each do |i|
         break if $judge
-        if $map[y][w - 1] != nil && $map[y][w - 1] == "." && (way + i) % 4 == 0
+        if w - 1 >= 0 && $map[y][w - 1] == "." && (way + i) % 4 == 0
             $ans += 1
             if $visited.include?("#{w - 1} #{y} 0")
                 $ans = -1
@@ -26,7 +26,7 @@ def saiki(w, y, way)
             $visited << "#{w - 1} #{y} 0"
             saiki(w - 1, y, 0)
             $judge = true
-        elsif $map[y - 1][w] != nil && $map[y - 1][w] == "." && (way + i) % 4 == 1
+        elsif y - 1 >= 0 && $map[y - 1][w] != nil && $map[y - 1][w] == "." && (way + i) % 4 == 1
             $ans += 1
             if $visited.include?("#{w} #{y - 1} 1")
                 $ans = -1
@@ -36,7 +36,7 @@ def saiki(w, y, way)
             $visited << "#{w} #{y - 1} 1"
             saiki(w, y - 1, 1)
             $judge = true
-        elsif $map[y][w + 1] != nil && $map[y][w + 1] == "." && (way + i) % 4 == 2
+        elsif w + 1 < $w && $map[y][w + 1] == "." && (way + i) % 4 == 2
             $ans += 1
             if $visited.include?("#{w + 1} #{y} 2")
                 $ans = -1
@@ -46,7 +46,7 @@ def saiki(w, y, way)
             $visited << "#{w + 1} #{y} 2"
             saiki(w + 1, y, 2)
             $judge = true
-        elsif $map[y + 1][w] != nil && $map[y + 1][w] == "." && (way + i) % 4 == 3
+        elsif y + 1 < $h && $map[y + 1][w] != nil && $map[y + 1][w] == "." && (way + i) % 4 == 3
             $ans += 1
             if $visited.include?("#{w} #{y + 1} 3")
                 $ans = -1
