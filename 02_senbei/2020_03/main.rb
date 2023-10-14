@@ -6,9 +6,14 @@ def main
     $map = make_map($h,"s")
     $ans = 0
     $judge = false
+    $goal = false
     $visited = Set.new(["#{pw - 1} #{py - 1} 1"])
     saiki(pw - 1, py - 1, 1)
-    puts $ans
+    if $goal
+        puts $ans
+    else
+        puts -1
+    end
 end
 
 #----------------------------------------------------------------------------------
@@ -22,7 +27,10 @@ def saiki(w, y, way)
                 $ans = -1
                 return
             end
-            return if y == $qy && w - 1 == $qw
+            if y == $qy && w - 1 == $qw
+                $goal = true
+                return
+            end
             $visited << "#{w - 1} #{y} 0"
             saiki(w - 1, y, 0)
             $judge = true
@@ -32,7 +40,10 @@ def saiki(w, y, way)
                 $ans = -1
                 return
             end
-            return if y - 1 == $qy && w == $qw
+            if y - 1 == $qy && w == $qw
+                $goal = true
+                return
+            end
             $visited << "#{w} #{y - 1} 1"
             saiki(w, y - 1, 1)
             $judge = true
@@ -42,7 +53,10 @@ def saiki(w, y, way)
                 $ans = -1
                 return
             end
-            return if y == $qy && w + 1 == $qw
+            if y == $qy && w + 1 == $qw
+                $goal = true
+                return
+            end
             $visited << "#{w + 1} #{y} 2"
             saiki(w + 1, y, 2)
             $judge = true
@@ -52,7 +66,10 @@ def saiki(w, y, way)
                 $ans = -1
                 return
             end
-            return if y + 1 == $qy && w == $qw
+            if y + 1 == $qy && w == $qw
+                $goal = true
+                return
+            end
             $visited << "#{w} #{y + 1} 3"
             saiki(w, y + 1, 3)
             $judge = true
