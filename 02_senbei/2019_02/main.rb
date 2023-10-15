@@ -12,8 +12,7 @@ def main
         diffb == 0 ? ans[seibutu[1][1]] = 0 : ans[seibutu[1][1]] = (bc - i * diffc) / diffb
         ans[seibutu[0][1]] = n - (i + ans[seibutu[1][1]])
         if ans[seibutu[1][1]] < 0 || ans[seibutu[0][1]] < 0
-            puts "-1 -1 -1"
-            return
+            next
         end
         next if ans.sum != n || ans[seibutu[0][1]] * seibutu[0][0] + ans[seibutu[1][1]] * seibutu[1][0] + ans[seibutu[2][1]] * seibutu[2][0] != m
         puts ans.join(" ")
