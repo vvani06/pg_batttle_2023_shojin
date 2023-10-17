@@ -2,14 +2,17 @@ def main
     n, m = intary
     $tree = Array.new(n + 1) {Set.new}
     m.times do
-        a, b = intary
+        b, a = intary
         $tree[a] << b
     end
-    n.times do |i|
-        $visited = Set.new
-        $ans = "No"
-        saiki(i + 1, 0)
-        puts $ans
+    $visited = Set.new
+    saiki(0, 0)
+    (1..n).each do |i|
+        if $visited.include?(i)
+            puts "Yes"
+        else
+            puts "No"
+        end
     end
 end
 
@@ -17,17 +20,10 @@ end
 require "set"
 
 def saiki(a, count)
-    if $tree[a].include?(0) && count < 3
-        $ans = "Yes"
-        return
-    end
     return if count >= 3
     $tree[a].each do |i|
-        next if $visited.include?(i)
         $visited << i
         saiki(i, count + 1)
-        $visited.delete(i)
-        break if $ans == "Yes"
     end
 end
 
