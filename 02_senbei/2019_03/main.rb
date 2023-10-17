@@ -5,10 +5,11 @@ def main
         b, a = intary
         $tree[a] << b
     end
+    $ans = Set.new
     $visited = Set.new
     saiki(0, 0)
     (1..n).each do |i|
-        if $visited.include?(i)
+        if $ans.include?(i)
             puts "Yes"
         else
             puts "No"
@@ -22,8 +23,11 @@ require "set"
 def saiki(a, count)
     return if count >= 3
     $tree[a].each do |i|
+        next if $visited.include?(i)
+        $ans << i
         $visited << i
         saiki(i, count + 1)
+        $visited.delete(i)
     end
 end
 
