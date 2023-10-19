@@ -13,16 +13,15 @@ def main
     end
   }
 
+  # 間にいる人数の数え上げ
+  between_nums = between_counts.tally
+  # 以下の数を記録する
+  under_nums = 0
   (2 * n - 1).times{|k|
-    puts between_counts.count{|i| i <= k }
+    # 数え上げの中に一致する数があれば加算
+    under_nums += between_nums[k] unless between_nums[k].nil?
+    puts under_nums
   }
 end
 
 main
-
-# lower_bound, upper_boundはいらんか
-# ref. https://atcoder.jp/contests/abc321/submissions/45823708
-# class Range
-#   def upper_bound; ac, wa = self.begin, self.end_open; while wa - ac > 1; if yield((wj = (ac + wa) / 2)); ac = wj else wa = wj end; end; yield(ac) ? ac : nil end
-#   def lower_bound; ac, wa = self.end_open, self.begin; while ac - wa > 1; if yield((wj = (ac + wa) / 2)); ac = wj else wa = wj end; end; yield(ac) ? ac : nil end
-# end
